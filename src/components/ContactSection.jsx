@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle, ArrowRight, AlertCircle } from 'lucide-react';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +10,15 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [focusedField, setFocusedField] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [emailJSLoaded, setEmailJSLoaded] = useState(false);
+
+  // Replace these with your actual EmailJS credentials
+  const EMAILJS_SERVICE_ID = 'service_pvhfsjp';
+  const EMAILJS_TEMPLATE_ID = 'template_w471djv';
+  const EMAILJS_PUBLIC_KEY = 'EzEOemqIzsDPbswEk';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,28 +36,101 @@ const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Load EmailJS script
+  useEffect(() => {
+    const loadEmailJS = () => {
+      if (window.emailjs) {
+        window.emailjs.init(EMAILJS_PUBLIC_KEY);
+        setEmailJSLoaded(true);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+      script.onload = () => {
+        if (window.emailjs) {
+          window.emailjs.init(EMAILJS_PUBLIC_KEY);
+          setEmailJSLoaded(true);
+        }
+      };
+      script.onerror = () => {
+        setError('Failed to load email service. Please try again later.');
+      };
+      document.head.appendChild(script);
+    };
+
+    loadEmailJS();
+  }, [EMAILJS_PUBLIC_KEY]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
   };
 
+  // EmailJS Submit Function
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    
-    // Reset after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+    setError('');
+
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+      setError('Please fill in all required fields.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Check if EmailJS is loaded
+    if (!emailJSLoaded || !window.emailjs) {
+      setError('Email service is still loading. Please try again in a moment.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: 'Shashini',
+        reply_to: formData.email
+      };
+
+      const response = await window.emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (response.status === 200) {
+        setIsSubmitted(true);
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        }, 5000);
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      if (error.text && error.text.includes('service')) {
+        setError('Email service configuration error. Please contact me directly via email.');
+      } else if (error.text && error.text.includes('template')) {
+        setError('Email template error. Please contact me directly via email.');
+      } else if (error.message && error.message.includes('network')) {
+        setError('Network error. Please check your connection and try again.');
+      } else {
+        setError('Failed to send message. Please try again or contact me directly via email.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
@@ -107,6 +187,22 @@ const ContactSection = () => {
               </p>
             </div>
 
+            {/* Direct Contact Info */}
+            <div className="space-y-4">
+              <h4 className="text-white font-semibold mb-4">Direct Contact</h4>
+              <div className="space-y-3">
+                <a 
+                  href="mailto:shashini.madushika@gmail.com" 
+                  className="flex items-center space-x-3 text-gray-400 hover:text-pink-400 transition-colors duration-300 group"
+                >
+                  <div className="p-2 bg-gray-800/50 rounded-lg group-hover:bg-pink-600/20 transition-colors duration-300">
+                    <Mail size={20} />
+                  </div>
+                  <span>shashinimadushika413@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
             {/* Social Links */}
             <div className="pt-8">
               <h4 className="text-white font-semibold mb-4">Follow Me</h4>
@@ -117,6 +213,8 @@ const ContactSection = () => {
                     <a
                       key={index}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 hover:border-pink-600/50 text-gray-400 hover:text-pink-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 backdrop-blur-sm group"
                       title={social.label}
                     >
@@ -133,131 +231,174 @@ const ContactSection = () => {
             <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-pink-600/50 transition-all duration-500 shadow-2xl">
               {!isSubmitted ? (
                 <div className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">Send Me a Message</h3>
+                    <p className="text-gray-400">Fill out the form below and I'll get back to you soon!</p>
+                    {!emailJSLoaded && (
+                      <div className="mt-2 text-sm text-yellow-400 flex items-center gap-2">
+                        <div className="w-3 h-3 border-2 border-yellow-400/30 border-t-yellow-400 rounded-full animate-spin"></div>
+                        Loading email service...
+                      </div>
+                    )}
+                  </div>
+
+                  {error && (
+                    <div className="p-4 bg-red-900/30 border border-red-700/50 rounded-xl flex items-start space-x-3 animate-pulse">
+                      <AlertCircle className="text-red-400 w-5 h-5 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-red-300 text-sm font-medium">Error</p>
+                        <p className="text-red-200 text-sm">{error}</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="relative">
+                        <label className="block text-white font-semibold mb-2">
+                          Name <span className="text-pink-400">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          onFocus={() => setFocusedField('name')}
+                          onBlur={() => setFocusedField(null)}
+                          required
+                          className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 ${
+                            focusedField === 'name' 
+                              ? 'border-pink-400 bg-gray-800/70 shadow-lg shadow-pink-400/10' 
+                              : 'border-gray-700 hover:border-gray-600'
+                          }`}
+                          placeholder="Your Name"
+                        />
+                        {focusedField === 'name' && (
+                          <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                        )}
+                      </div>
+                      
+                      <div className="relative">
+                        <label className="block text-white font-semibold mb-2">
+                          Email <span className="text-pink-400">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          onFocus={() => setFocusedField('email')}
+                          onBlur={() => setFocusedField(null)}
+                          required
+                          className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 ${
+                            focusedField === 'email' 
+                              ? 'border-pink-400 bg-gray-800/70 shadow-lg shadow-pink-400/10' 
+                              : 'border-gray-700 hover:border-gray-600'
+                          }`}
+                          placeholder="your.email@example.com"
+                        />
+                        {focusedField === 'email' && (
+                          <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
+                        )}
+                      </div>
+                    </div>
+                    
                     <div className="relative">
-                      <label className="block text-white font-semibold mb-2">Name *</label>
+                      <label className="block text-white font-semibold mb-2">
+                        Subject <span className="text-pink-400">*</span>
+                      </label>
                       <input
                         type="text"
-                        name="name"
-                        value={formData.name}
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleChange}
-                        onFocus={() => setFocusedField('name')}
+                        onFocus={() => setFocusedField('subject')}
                         onBlur={() => setFocusedField(null)}
                         required
                         className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 ${
-                          focusedField === 'name' 
-                            ? 'border-pink-400 bg-gray-800/70' 
+                          focusedField === 'subject' 
+                            ? 'border-pink-400 bg-gray-800/70 shadow-lg shadow-pink-400/10' 
                             : 'border-gray-700 hover:border-gray-600'
                         }`}
-                        placeholder="Your Name"
+                        placeholder="Project Discussion, Collaboration, etc."
                       />
-                      {focusedField === 'name' && (
+                      {focusedField === 'subject' && (
                         <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
                       )}
                     </div>
                     
                     <div className="relative">
-                      <label className="block text-white font-semibold mb-2">Email *</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
+                      <label className="block text-white font-semibold mb-2">
+                        Message <span className="text-pink-400">*</span>
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
                         onChange={handleChange}
-                        onFocus={() => setFocusedField('email')}
+                        onFocus={() => setFocusedField('message')}
                         onBlur={() => setFocusedField(null)}
                         required
-                        className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 ${
-                          focusedField === 'email' 
-                            ? 'border-pink-400 bg-gray-800/70' 
+                        rows={5}
+                        className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 resize-none ${
+                          focusedField === 'message' 
+                            ? 'border-pink-400 bg-gray-800/70 shadow-lg shadow-pink-400/10' 
                             : 'border-gray-700 hover:border-gray-600'
                         }`}
-                        placeholder="your.email@example.com"
-                      />
-                      {focusedField === 'email' && (
+                        placeholder="Tell me about your project, goals, timeline, budget, and any specific requirements. The more details you provide, the better I can help you!"
+                      ></textarea>
+                      {focusedField === 'message' && (
                         <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
                       )}
                     </div>
-                  </div>
-                  
-                  <div className="relative">
-                    <label className="block text-white font-semibold mb-2">Subject *</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField('subject')}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 ${
-                        focusedField === 'subject' 
-                          ? 'border-pink-400 bg-gray-800/70' 
-                          : 'border-gray-700 hover:border-gray-600'
-                      }`}
-                      placeholder="Project Discussion"
-                    />
-                    {focusedField === 'subject' && (
-                      <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
-                    )}
-                  </div>
-                  
-                  <div className="relative">
-                    <label className="block text-white font-semibold mb-2">Message *</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField('message')}
-                      onBlur={() => setFocusedField(null)}
-                      required
-                      rows={5}
-                      className={`w-full px-4 py-4 bg-gray-800/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-all duration-300 resize-none ${
-                        focusedField === 'message' 
-                          ? 'border-pink-400 bg-gray-800/70' 
-                          : 'border-gray-700 hover:border-gray-600'
-                      }`}
-                      placeholder="Tell me about your project, goals, timeline, and any specific requirements..."
-                    ></textarea>
-                    {focusedField === 'message' && (
-                      <div className="absolute -top-1 left-4 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
-                    )}
-                  </div>
-                  
-                  <button
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    className={`w-full px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg relative overflow-hidden group ${
-                      isSubmitting 
-                        ? 'bg-gray-600 cursor-not-allowed' 
-                        : 'bg-pink-600 hover:bg-pink-700 hover:scale-105 shadow-pink-600/30 hover:shadow-pink-600/40'
-                    }`}
-                  >
-                    <div className="absolute inset-0 bg-pink-700 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                     
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        <span className="text-white relative z-10">Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
-                        <span className="text-white relative z-10">Send Message</span>
-                      </>
-                    )}
-                  </button>
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      disabled={isSubmitting || !emailJSLoaded || !formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()}
+                      className={`w-full px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg relative overflow-hidden group ${
+                        isSubmitting || !emailJSLoaded || !formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()
+                          ? 'bg-gray-600 cursor-not-allowed text-gray-300' 
+                          : 'bg-pink-600 hover:bg-pink-700 hover:scale-[1.02] shadow-pink-600/30 hover:shadow-pink-600/50 hover:shadow-xl text-white'
+                      }`}
+                    >
+                      <div className="absolute inset-0 bg-pink-700 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                      
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          <span className="relative z-10">Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                          <span className="relative z-10">Send Message</span>
+                          <ArrowRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-gray-500 text-center mt-4">
+                    Your information is secure and will only be used to respond to your inquiry.
+                  </p>
                 </div>
               ) : (
                 <div className="text-center py-12 space-y-6">
-                  <div className="w-20 h-20 bg-green-600/20 rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-20 h-20 bg-green-600/20 rounded-full flex items-center justify-center mx-auto animate-pulse">
                     <CheckCircle className="text-green-400 w-12 h-12" />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                    <p className="text-gray-400">
-                      Thanks for reaching out! I'll get back to you within 24 hours.
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold text-white mb-2">Message Sent Successfully! 🎉</h3>
+                    <p className="text-gray-400 text-lg">
+                      Thanks for reaching out! I've received your message and will get back to you within 24 hours.
                     </p>
+                    <div className="bg-gray-800/50 rounded-lg p-4 mt-6">
+                      <p className="text-sm text-gray-300">
+                        <strong className="text-white">What's next?</strong><br />
+                        I'll review your message and respond with next steps or any follow-up questions. 
+                        Keep an eye on your inbox!
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}

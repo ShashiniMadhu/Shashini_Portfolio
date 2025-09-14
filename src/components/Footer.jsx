@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 mb-4 md:mb-0">
-            © 2025 Alex Portfolio. All rights reserved.
+            © 2025 Shashini Portfolio. All rights reserved.
           </div>
           <div className="flex items-center gap-2 text-gray-400">
-            Made with <Star className="text-pink-400" size={16} fill="currentColor" /> by Alex
+            Made with <Star className="text-pink-400" size={16} fill="currentColor" /> by Shashini
           </div>
         </div>
       </div>

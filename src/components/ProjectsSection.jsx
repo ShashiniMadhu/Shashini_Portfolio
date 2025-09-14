@@ -25,27 +25,25 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce platform with React, Node.js, and Stripe integration for seamless online shopping experience.',
-      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&h=300&fit=crop',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      title: 'TripTrack',
+      description: 'TripTrack — a full digital platform for highway bus travel in Sri Lanka, built to enable real-time booking, secure payments, QR tickets, and smarter travel management.',
+      image: 'triptrack1.jpeg',
+      tech: ['HTML', 'CSS', 'JavaScript', 'PHP','MySQL'],
       category: 'fullstack',
-      github: '#',
-      live: '#',
-      status: 'completed',
-      stars: 24
+      github: 'https://github.com/PasandiRanga/TripTrack.git',
+      live: 'https://drive.google.com/file/d/17lgkeL96AFm2_oUskU-g4s1_LsneTdPf/view?usp=sharing',
+      status: 'completed'
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, team features, and productivity analytics.',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop',
-      tech: ['React', 'Firebase', 'Tailwind CSS', 'Socket.io'],
-      category: 'frontend',
-      github: '#',
-      live: '#',
-      status: 'completed',
-      stars: 18
+      title: 'SkillMentor',
+      description: 'SkillMentor-A smart classroom management system where students can book classrooms with receipt uploads, and admins manage approvals, classrooms, mentors, students, and sessions.',
+      image: 'skillmentor1.png',
+      tech: ['React', 'Java Sprinboot', 'Tailwind CSS', 'MySQL','PostgreSQL','Render','Vercel','Superbase'],
+      category: 'fullstack',
+      github: 'https://github.com/ShashiniMadhu/Skill-Mentor.git',
+      live: 'https://drive.google.com/file/d/14MEj4qZOO26dWORV5nu2GrrP3u76BG99/view?usp=drive_link',
+      status: 'completed'
     },
     {
       id: 3,
@@ -219,7 +217,12 @@ const ProjectsSection = () => {
                 {/* Floating Action Button */}
                 <div className="absolute top-4 right-4">
                   <button className="p-2 bg-pink-600/90 backdrop-blur-sm rounded-full text-white hover:bg-pink-700 transition-all duration-300 transform hover:scale-110">
-                    <Eye size={16} />
+                    <a
+                      href={project.live}
+                      className="group/btn p-4 bg-gray-800/90 backdrop-blur-sm rounded-full text-white hover:text-pink-400 hover:bg-pink-600/20 transition-all duration-300 transform hover:scale-110"
+                    >
+                      <Eye size={16} />
+                    </a>
                   </button>
                 </div>
               </div>
