@@ -42,7 +42,7 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
             onClick={() => handleNavClick('home')}
           >
             <span className="relative">
-              Portfolio
+              Shashini
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-500 group-hover:w-full transition-all duration-300"></div>
             </span>
           </div>
