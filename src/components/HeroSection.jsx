@@ -5,10 +5,11 @@ const HeroSection = ({ setActiveSection }) => {
   const [text, setText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const roles = [
+    'Computer Science Student',
+    'Aspiring Software Engineer', 
     'Full Stack Developer',
-    'UI/UX Designer', 
-    'Problem Solver',
-    'Tech Enthusiast'
+    'AI/ML Enthusiast',
+    'Innovation Seeker'
   ];
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const HeroSection = ({ setActiveSection }) => {
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 <span className="text-white">I'm </span>
                 <span className="text-pink-400 hover:text-pink-300 transition-colors duration-300 cursor-default">
-                  Alex
+                  Shashini
                 </span>
               </h1>
 
@@ -84,12 +85,23 @@ const HeroSection = ({ setActiveSection }) => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
-                onClick={() => setActiveSection('projects')}
+                onClick={() => {
+                  // Create a temporary link element to trigger download
+                  const link = document.createElement('a');
+                  link.href = '/Shashini_CV.pdf'; // Replace with your actual CV path
+                  link.download = 'Shashini_CV.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
                 className="group px-8 py-4 bg-pink-700 text-white rounded-lg font-semibold hover:bg-pink-600 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-pink-900/50 flex items-center justify-center space-x-2 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-pink-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
-                <span className="relative z-10">View My Work</span>
-                <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300 relative z-10" size={18} />
+                <svg className="w-5 h-5 relative z-10 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                  <path d="M12,11L16,15H13V19H11V15H8L12,11Z"/>
+                </svg>
+                <span className="relative z-10">Download CV</span>
               </button>
               
               <button
@@ -97,45 +109,47 @@ const HeroSection = ({ setActiveSection }) => {
                 className="px-8 py-4 border-2 border-pink-700 text-pink-400 rounded-lg font-semibold hover:bg-pink-950/40 hover:border-pink-600 hover:text-pink-300 transform hover:scale-105 transition-all duration-300 backdrop-blur-sm relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-pink-900/10 transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center"></div>
+                <svg className="w-5 h-5 inline-block mr-2 group-hover:rotate-12 transition-transform duration-300 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                </svg>
                 <span className="relative z-10">Get In Touch</span>
               </button>
             </div>
 
-            {/* Social proof or stats with hover effects */}
             <div className="flex space-x-8 pt-8">
-              <div className="text-center group cursor-default">
-                <div className="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors duration-300">50+</div>
-                <div className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300">Projects</div>
-              </div>
-              <div className="text-center group cursor-default">
-                <div className="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors duration-300">3+</div>
-                <div className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300">Years</div>
-              </div>
-              <div className="text-center group cursor-default">
-                <div className="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors duration-300">99%</div>
-                <div className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300">Satisfaction</div>
-              </div>
             </div>
           </div>
 
-          {/* Right Column - Image Space */}
-          <div className="relative lg:flex justify-center items-center hidden">
+          {/* Right Column - Professional Image */}
+          <div className="relative flex justify-center items-end order-first lg:order-last h-full">
             <div className="relative group">
               {/* Interactive decorative elements */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-pink-800 rounded-lg group-hover:border-pink-700 transition-all duration-300 group-hover:scale-105"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-pink-950/30 rounded-lg blur-sm group-hover:bg-pink-900/40 transition-all duration-300"></div>
+              <div className="absolute -bottom-8 -right-8 w-28 h-28 md:w-44 md:h-44 lg:w-52 lg:h-52 xl:w-56 xl:h-56 bg-pink-950/30 rounded-lg blur-sm group-hover:bg-pink-900/40 transition-all duration-300"></div>
               
-              {/* Image placeholder with interactive styling */}
-              <div className="w-80 h-96 bg-black border border-gray-800 group-hover:border-pink-900 rounded-2xl flex items-center justify-center relative overflow-hidden shadow-2xl transition-all duration-300 group-hover:shadow-pink-950/30">
-                {/* Placeholder content */}
-                <div className="text-center space-y-4 opacity-30 group-hover:opacity-50 transition-opacity duration-300">
-                  <div className="w-24 h-24 bg-pink-800 rounded-full mx-auto group-hover:bg-pink-700 transition-colors duration-300"></div>
-                  <div className="text-gray-600 text-sm">Your Professional Photo</div>
-                </div>
-                
-                {/* Subtle overlay effect */}
-                <div className="absolute inset-0 bg-black/10"></div>
-              </div>
+              {/* Large Professional Image anchored to bottom */}
+              <img 
+                src="src/assets/portfolio.png" 
+                alt="Professional Portfolio Photo"
+                className="
+                  w-96 sm:w-[28rem] md:w-[36rem] lg:w-[42rem] xl:w-[48rem] 2xl:w-[56rem]
+                  h-auto max-h-full
+                  object-contain object-bottom
+                  rounded-2xl shadow-2xl 
+                  group-hover:shadow-pink-950/30 
+                  transition-all duration-300
+                  group-hover:scale-[1.02] transform
+                  filter group-hover:brightness-110
+                "
+                style={{
+                  maxHeight: 'calc(100vh - 8rem)'
+                }}
+              />
+              
+              {/* Floating accent elements */}
+              <div className="absolute top-1/4 -right-6 w-5 h-5 bg-pink-700 rounded-full animate-pulse opacity-60"></div>
+              <div className="absolute bottom-1/4 -left-6 w-4 h-4 bg-pink-800 rounded-full animate-pulse opacity-40" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-1/3 -right-12 w-3 h-3 bg-pink-600 rounded-full animate-ping opacity-50" style={{animationDelay: '2s'}}></div>
+              <div className="absolute top-1/2 -left-10 w-2 h-2 bg-pink-500 rounded-full animate-pulse opacity-30" style={{animationDelay: '3s'}}></div>
             </div>
           </div>
         </div>

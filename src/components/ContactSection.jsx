@@ -53,34 +53,9 @@ const ContactSection = () => {
     }, 3000);
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'alex@example.com',
-      href: 'mailto:alex@example.com',
-      color: 'pink'
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
-      color: 'pink'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'San Francisco, CA',
-      href: '#',
-      color: 'pink'
-    }
-  ];
-
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' }
+    { icon: Github, href: 'https://github.com/ShashiniMadhu', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/shashini-madushika-965b01319?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
   ];
 
   return (
@@ -130,34 +105,6 @@ const ContactSection = () => {
               <p className="text-gray-400 leading-relaxed">
                 Feel free to reach out through any of the channels below, and I'll get back to you as soon as possible!
               </p>
-            </div>
-
-            {/* Contact Methods */}
-            <div className="space-y-6">
-              {contactInfo.map((contact, index) => {
-                const IconComponent = contact.icon;
-                return (
-                  <a
-                    key={index}
-                    href={contact.href}
-                    className="flex items-center gap-6 p-4 rounded-xl border bg-gray-900/50 border-gray-800 hover:border-pink-600/50 backdrop-blur-sm hover:scale-105 transition-all duration-300 group cursor-pointer"
-                    style={{ animationDelay: `${index * 150}ms` }}
-                  >
-                    <div className="p-4 bg-gray-800/70 rounded-lg border border-gray-700 group-hover:border-pink-600/50 group-hover:scale-110 transition-all duration-300">
-                      <IconComponent className="text-pink-400 transition-colors duration-300" size={24} />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1 group-hover:text-pink-400 transition-colors duration-300">
-                        {contact.label}
-                      </h4>
-                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                        {contact.value}
-                      </p>
-                    </div>
-                    <ArrowRight className="text-gray-600 group-hover:text-pink-400 group-hover:translate-x-2 transition-all duration-300 ml-auto" size={20} />
-                  </a>
-                );
-              })}
             </div>
 
             {/* Social Links */}

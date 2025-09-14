@@ -22,16 +22,16 @@ const AboutSection = () => {
   }, []);
 
   const stats = [
-    { number: '50+', label: 'Projects Completed', icon: Award },
-    { number: '3+', label: 'Years Experience', icon: Coffee },
-    { number: '100%', label: 'Client Satisfaction', icon: Heart },
-    { number: '24/7', label: 'Support Available', icon: Zap }
+    { number: '15+', label: 'Projects Completed', icon: Award },
+    { number: '2+', label: 'Years Experience', icon: Coffee },
+    { number: '3.33', label: 'CGPA', icon: Heart },
+    { number: '24/7', label: 'Learning Mode', icon: Zap }
   ];
 
   const skills = [
-    { icon: Code, label: 'Clean Code', color: 'text-pink-600', bgColor: 'bg-pink-100', description: 'Writing maintainable and scalable code' },
-    { icon: Palette, label: 'UI/UX Design', color: 'text-rose-600', bgColor: 'bg-rose-100', description: 'Creating beautiful user experiences' },
-    { icon: Zap, label: 'Performance', color: 'text-pink-700', bgColor: 'bg-pink-50', description: 'Optimizing for speed and efficiency' }
+    { icon: Code, label: 'Full-Stack Dev', color: 'text-pink-600', bgColor: 'bg-pink-100', description: 'React, Spring Boot, MERN Stack' },
+    { icon: Palette, label: 'AI/ML', color: 'text-rose-600', bgColor: 'bg-rose-100', description: 'Python, Machine Learning, Gemini API' },
+    { icon: Zap, label: 'Leadership', color: 'text-pink-700', bgColor: 'bg-pink-50', description: 'Team collaboration and project management' }
   ];
 
   return (
@@ -47,7 +47,6 @@ const AboutSection = () => {
           backgroundSize: '40px 40px'
         }}></div>
       </div>
-
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -67,7 +66,7 @@ const AboutSection = () => {
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Crafting digital experiences with passion, precision, and a touch of creativity
+            Computer Science Student | Software Developer | AI/ML Enthusiast
           </p>
         </div>
 
@@ -77,22 +76,29 @@ const AboutSection = () => {
             <div className="space-y-6">
               <div className="group">
                 <p className="text-lg text-gray-700 leading-relaxed hover:text-gray-900 transition-colors duration-300">
-                  I'm a passionate full-stack developer with a keen eye for design and a love for clean, efficient code. 
-                  My journey in web development started with curiosity and has evolved into a professional pursuit of creating 
-                  exceptional digital experiences.
+                  I'm Shashini Madushika, a dedicated Computer Science undergraduate at the University of Colombo School of Computing 
+                  with strong expertise in algorithms and full-stack software development. I'm passionate about Machine Learning and 
+                  Artificial Intelligence with hands-on experience in developing innovative solutions.
                 </p>
               </div>
               
               <div className="group">
                 <p className="text-lg text-gray-700 leading-relaxed hover:text-gray-900 transition-colors duration-300">
-                  I specialize in React, Node.js, and modern web technologies. When I'm not coding, you'll find me 
-                  exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.
+                  I specialize in Java Spring Boot, React, and modern web technologies including Python, JavaScript, and database systems. 
+                  With proven leadership abilities in collaborative development environments, I've successfully guided teams and delivered 
+                  high-quality projects like StructuraX and UniHub. Currently working as a Backend Developer at Athenyx Systems.
+                </p>
+              </div>
+              
+              <div className="group">
+                <p className="text-lg text-gray-700 leading-relaxed hover:text-gray-900 transition-colors duration-300">
+                  When I'm not coding, you'll find me competing in sports like Kabaddi and Volleyball, contributing to hackathons. 
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Professional Photo Section Only */}
+          {/* Professional Photo Section */}
           <div className="flex justify-center lg:justify-end">
             <div className="relative group">
               <div className="w-72 h-80 bg-pink-50 rounded-3xl border-2 border-pink-200 flex items-center justify-center relative overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500">
@@ -100,13 +106,12 @@ const AboutSection = () => {
                 <div className="absolute top-4 left-4 w-12 h-12 border-2 border-pink-300 rounded-lg group-hover:border-pink-400 transition-colors duration-300"></div>
                 <div className="absolute bottom-4 right-4 w-16 h-16 bg-pink-200/50 rounded-lg blur-sm group-hover:bg-pink-300/50 transition-colors duration-300"></div>
                 
-                {/* Main content */}
-                <div className="text-center space-y-4 z-10 relative group-hover:scale-105 transition-transform duration-300">
-                  <div className="w-20 h-20 bg-pink-200 rounded-full mx-auto group-hover:bg-pink-300 transition-colors duration-300 flex items-center justify-center">
-                    <div className="w-14 h-14 bg-pink-400 rounded-full"></div>
-                  </div>
-                  <div className="text-pink-600 font-medium text-sm">Your Professional Photo</div>
-                </div>
+                {/* Your Photo */}
+                <img 
+                  src="src/assets/shashini.jpg" 
+                  alt="Shashini Madushika" 
+                  className="w-64 h-72 object-cover rounded-2xl z-10 relative group-hover:scale-105 transition-transform duration-300 shadow-md"
+                />
                 
                 {/* Floating particles */}
                 <div className="absolute top-8 right-8 w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>

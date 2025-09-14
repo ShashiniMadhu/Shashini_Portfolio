@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Code, Database, Palette, Zap, Server, Globe } from 'lucide-react';
+import { Code, Database, Palette, Zap, Server, Globe, Brain, Briefcase } from 'lucide-react';
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,45 +34,71 @@ const SkillsSection = () => {
 
   const skillCategories = [
     {
-      title: 'Frontend Development',
+      title: 'Programming Languages',
       icon: Code,
       color: 'pink',
       gradient: 'from-pink-500 to-rose-600',
       skills: [
-        { name: 'React', level: 95 },
-        { name: 'JavaScript', level: 90 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'Tailwind CSS', level: 92 },
-        { name: 'Next.js', level: 88 },
-        { name: 'Vue.js', level: 75 }
+        { name: 'Java', level: 95 },
+        { name: 'JavaScript (ES6+)', level: 88 },
+        { name: 'C/C++', level: 85 },
+        { name: 'PHP', level: 80 },
+        { name: 'Scala', level: 75 }
       ]
     },
     {
-      title: 'Backend Development',
-      icon: Server,
+      title: 'Web Technologies',
+      icon: Globe,
       color: 'rose',
       gradient: 'from-rose-500 to-pink-600',
       skills: [
-        { name: 'Node.js', level: 88 },
-        { name: 'Express.js', level: 85 },
-        { name: 'Python', level: 82 },
-        { name: 'Django', level: 78 },
-        { name: 'REST APIs', level: 90 },
-        { name: 'GraphQL', level: 75 }
+        { name: 'React', level: 92 },
+        { name: 'HTML5/CSS3', level: 90 },
+        { name: 'Bootstrap', level: 85 },
+        { name: 'Tailwind CSS', level: 88 },
+        { name: 'Material UI', level: 85 },
+        { name: 'RESTful APIs', level: 90 }
       ]
     },
     {
-      title: 'Database & Tools',
-      icon: Database,
+      title: 'Frameworks & Tools',
+      icon: Server,
       color: 'purple',
       gradient: 'from-purple-500 to-pink-600',
       skills: [
-        { name: 'MongoDB', level: 85 },
-        { name: 'PostgreSQL', level: 80 },
-        { name: 'Firebase', level: 88 },
-        { name: 'Git', level: 92 },
-        { name: 'Docker', level: 75 },
-        { name: 'AWS', level: 70 }
+        { name: 'Spring Boot', level: 95 },
+        { name: 'JPA/Hibernate', level: 88 },
+        { name: 'Git/GitHub', level: 92 },
+        { name: 'Linux', level: 82 },
+        { name: 'Postman', level: 85 },
+      ]
+    },
+    {
+      title: 'Database & Cloud',
+      icon: Database,
+      color: 'indigo',
+      gradient: 'from-indigo-500 to-purple-600',
+      skills: [
+        { name: 'MySQL', level: 90 },
+        { name: 'PostgreSQL', level: 85 },
+        { name: 'MongoDB', level: 80 },
+        { name: 'Supabase', level: 82 },
+        { name: 'Render', level: 78 },
+        { name: 'Vercel', level: 85 }
+      ]
+    },
+    {
+      title: 'Development Tools',
+      icon: Briefcase,
+      color: 'emerald',
+      gradient: 'from-emerald-500 to-teal-600',
+      skills: [
+        { name: 'VS Code', level: 95 },
+        { name: 'IntelliJ IDEA', level: 90 },
+        { name: 'PyCharm', level: 85 },
+        { name: 'RStudio', level: 80 },
+        { name: 'Octave', level: 75 },
+        { name: 'Clerk Auth', level: 82 }
       ]
     }
   ];
@@ -117,6 +143,45 @@ const SkillsSection = () => {
         iconBg: 'bg-purple-100',
         shadow: 'shadow-purple-100',
         hoverShadow: 'hover:shadow-purple-200'
+      },
+      indigo: {
+        bg: 'bg-indigo-50',
+        hoverBg: 'hover:bg-indigo-100',
+        border: 'border-indigo-200',
+        hoverBorder: 'hover:border-indigo-300',
+        text: 'text-indigo-600',
+        progress: 'bg-indigo-500',
+        progressBg: 'bg-indigo-100',
+        icon: 'text-indigo-500',
+        iconBg: 'bg-indigo-100',
+        shadow: 'shadow-indigo-100',
+        hoverShadow: 'hover:shadow-indigo-200'
+      },
+      violet: {
+        bg: 'bg-violet-50',
+        hoverBg: 'hover:bg-violet-100',
+        border: 'border-violet-200',
+        hoverBorder: 'hover:border-violet-300',
+        text: 'text-violet-600',
+        progress: 'bg-violet-500',
+        progressBg: 'bg-violet-100',
+        icon: 'text-violet-500',
+        iconBg: 'bg-violet-100',
+        shadow: 'shadow-violet-100',
+        hoverShadow: 'hover:shadow-violet-200'
+      },
+      emerald: {
+        bg: 'bg-emerald-50',
+        hoverBg: 'hover:bg-emerald-100',
+        border: 'border-emerald-200',
+        hoverBorder: 'hover:border-emerald-300',
+        text: 'text-emerald-600',
+        progress: 'bg-emerald-500',
+        progressBg: 'bg-emerald-100',
+        icon: 'text-emerald-500',
+        iconBg: 'bg-emerald-100',
+        shadow: 'shadow-emerald-100',
+        hoverShadow: 'hover:shadow-emerald-200'
       }
     };
     return colorMap[color];
@@ -156,7 +221,7 @@ const SkillsSection = () => {
           </h2>
           
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Technologies and tools I use to bring innovative ideas to life
+            Technologies and tools I use to build innovative software solutions and AI-powered applications
           </p>
         </div>
 
@@ -183,7 +248,7 @@ const SkillsSection = () => {
                   </div>
                 </div>
                 
-                <h3 className={`text-2xl font-bold ${colors.text} mb-8 text-center transition-colors duration-300`}>
+                <h3 className={`text-xl font-bold ${colors.text} mb-8 text-center transition-colors duration-300`}>
                   {category.title}
                 </h3>
 
@@ -196,18 +261,18 @@ const SkillsSection = () => {
                     return (
                       <div key={skillIndex} className="group/skill">
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-gray-800 font-semibold group-hover/skill:text-gray-900 transition-colors duration-300">
+                          <span className="text-gray-800 font-semibold text-sm group-hover/skill:text-gray-900 transition-colors duration-300">
                             {skill.name}
                           </span>
-                          <span className={`${colors.text} font-bold text-sm transition-all duration-300 group-hover/skill:scale-110`}>
+                          <span className={`${colors.text} font-bold text-xs transition-all duration-300 group-hover/skill:scale-110`}>
                             {skill.level}%
                           </span>
                         </div>
                         
                         {/* Progress Bar */}
-                        <div className={`w-full ${colors.progressBg} rounded-full h-3 overflow-hidden shadow-inner`}>
+                        <div className={`w-full ${colors.progressBg} rounded-full h-2.5 overflow-hidden shadow-inner`}>
                           <div
-                            className={`${colors.progress} h-3 rounded-full transition-all duration-1000 ease-out relative overflow-hidden`}
+                            className={`${colors.progress} h-2.5 rounded-full transition-all duration-1000 ease-out relative overflow-hidden`}
                             style={{ 
                               width: isAnimated ? `${skill.level}%` : '0%',
                               transitionDelay: `${categoryIndex * 200 + skillIndex * 100}ms`
