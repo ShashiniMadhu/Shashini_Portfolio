@@ -37,7 +37,7 @@ const ProjectsSection = () => {
     {
       id: 2,
       title: 'SkillMentor',
-      description: 'SkillMentor-A smart classroom management system where students can book classrooms with receipt uploads, and admins manage approvals, classrooms, mentors, students, and sessions.',
+      description: 'SkillMentor-A smart classroom management system where students can schedule classrooms.',
       image: 'skillmentor1.png',
       tech: ['React', 'Java Sprinboot', 'Tailwind CSS', 'MySQL','PostgreSQL','Render','Vercel','Superbase'],
       category: 'fullstack',
@@ -47,51 +47,47 @@ const ProjectsSection = () => {
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather dashboard with forecasts, interactive maps, and location-based recommendations.',
-      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop',
-      tech: ['React', 'OpenWeather API', 'Chart.js', 'Geolocation'],
-      category: 'frontend',
-      github: '#',
-      live: '#',
-      status: 'completed',
-      stars: 32
+      title: 'StructuraX',
+      description: 'StructuraX is a construction management system built with enabling real-time project tracking, multi-role user management, responsive interfaces.',
+      image: 'structurax1.png',
+      tech: ['React', 'TailwindCSS', 'Java Springboot', 'MySQL'],
+      category: 'fullstack',
+      github: 'https://github.com/DilshaniNK/StructureX-Frontend.git',
+      live: 'https://drive.google.com/file/d/1-V0wL884xuuW2MHJ7c9_jtNj4h_ByO2o/view?usp=sharing',
+      status: 'ongoing'
     },
     {
       id: 4,
-      title: 'Portfolio Website',
-      description: 'A responsive portfolio website with modern animations, smooth scrolling, and interactive elements.',
+      title: 'UniHUB',
+      description: 'UniHub is a lecturer–student communication platform built with featuring query management, appointment scheduling, AI-powered paper discussions, and student productivity tools.',
       image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop',
-      tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Netlify'],
-      category: 'frontend',
-      github: '#',
-      live: '#',
-      status: 'ongoing',
-      stars: 45
+      tech: ['React', 'TailwindCSS', 'Java Springboot', 'MySQL','alwaysdata','geminai ai'],
+      category: 'fullstack',
+      github: 'https://github.com/Peshala84/uni-hub.git',
+      live: 'https://drive.google.com/file/d/1-V0wL884xuuW2MHJ7c9_jtNj4h_ByO2o/view?usp=sharing',
+      status: 'ongoing'
     },
     {
       id: 5,
-      title: 'Social Media App',
-      description: 'A social media platform with posts, comments, real-time chat, user profiles, and advanced privacy settings.',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop',
-      tech: ['React', 'Express', 'PostgreSQL', 'Socket.io'],
+      title: 'AI-Powered Interview Preparation App',
+      description: 'An AI-powered interview preparation platform built with the MERN stack and Gemini API for intelligent Q&A generation and a seamless user experience.',
+      image: 'interviewprep1.png',
+      tech: ['MERN Stack'],
       category: 'fullstack',
-      github: '#',
+      github: 'https://github.com/ShashiniMadhu/INTERVIEWPREPAI.git',
       live: '#',
-      status: 'completed',
-      stars: 67
+      status: 'ongoing'
     },
     {
       id: 6,
-      title: 'Cryptocurrency Tracker',
-      description: 'A real-time cryptocurrency tracker with interactive charts, news feed, and portfolio management features.',
-      image: 'https://images.unsplash.com/photo-1518544866-3c6b77c4e1c5?w=500&h=300&fit=crop',
-      tech: ['React', 'CoinGecko API', 'Chart.js', 'Local Storage'],
-      category: 'frontend',
-      github: '#',
-      live: '#',
-      status: 'completed',
-      stars: 29
+      title: 'Email/SMS Spam Classifier',
+      description: 'An ML-powered spam classifier built with featuring a Streamlit interface and cloud deployment on Render for real-time, accessible spam detection.',
+      image: 'ml1.png',
+      tech: ['Python', 'NLTK', 'Scikit-learn','render'],
+      category: 'fullstack',
+      github: 'https://github.com/ShashiniMadhu/Spam_Classifier.git',
+      live: 'https://drive.google.com/file/d/1LDIMvpSNdkf2K4wZ_qbbQgeG30E-dnBl/view?usp=drive_link',
+      status: 'completed'
     }
   ];
 
