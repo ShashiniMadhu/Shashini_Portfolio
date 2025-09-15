@@ -256,28 +256,6 @@ export default function SpamClassifier() {
                     </div>
                   </div>
                 </div>
-
-                <div className="bg-orange-900/20 border border-orange-800/30 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-orange-400 mb-6 text-center">System Performance</h3>
-                  <div className="grid md:grid-cols-4 gap-6 text-center">
-                    <div>
-                      <h4 className="text-2xl font-bold text-orange-300 mb-2">99%+</h4>
-                      <p className="text-gray-300 text-sm">Classification Accuracy</p>
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-orange-300 mb-2">&lt;1s</h4>
-                      <p className="text-gray-300 text-sm">Response Time</p>
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-orange-300 mb-2">5K+</h4>
-                      <p className="text-gray-300 text-sm">Training Messages</p>
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-orange-300 mb-2">24/7</h4>
-                      <p className="text-gray-300 text-sm">Cloud Availability</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             )}
 

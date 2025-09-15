@@ -49,58 +49,130 @@ export default function StructuraX() {
   const userRoles = [
     {
       role: 'Quantity Survey Officer',
-      color: 'text-yellow-400',
-      bg: 'bg-yellow-900/20',
-      border: 'border-yellow-800/30',
+      color: 'text-blue-400',
+      bg: 'bg-blue-900/20',
+      border: 'border-blue-800/30',
       responsibilities: [
-        'Create BOQ (Bill of Quantity) from designs',
-        'Estimate project values and create work breakdown',
-        'Manage material lists with selected brands',
-        'Track project progress and financial status',
+        'Review design drawings and create BOQ',
+        'Estimate project value and create work breakdown',
+        'Manage material lists and update costings',
         'Create site visit logs and reports',
-        'Request quotations for material purchases'
+        'View project progress and financial status',
+        'Approve material requests and quotations'
+      ]
+    },
+    {
+      role: 'Senior QS Officer',
+      color: 'text-purple-400',
+      bg: 'bg-purple-900/20',
+      border: 'border-purple-800/30',
+      responsibilities: [
+        'All QS Officer functions',
+        'Assign QS officers to projects',
+        'Create customer logins',
+        'Confirm and edit estimated values'
       ]
     },
     {
       role: 'Project Manager',
-      color: 'text-yellow-400',
-      bg: 'bg-yellow-900/20',
-      border: 'border-yellow-800/30',
+      color: 'text-green-400',
+      bg: 'bg-green-900/20',
+      border: 'border-green-800/30',
       responsibilities: [
-        'Monitor project progress and timelines',
-        'View financial status and payment tracking',
-        'Review daily updates from site supervisors',
-        'Coordinate with project owners',
-        'Manage site visit scheduling',
-        'Oversee material requests and approvals'
+        'View project progress and financial status',
+        'Monitor material amounts and requests',
+        'Create site visit logs',
+        'Chat with project owners',
+        'Review daily supervisor updates'
       ]
     },
     {
       role: 'Site Supervisor',
-      color: 'text-yellow-300',
+      color: 'text-yellow-400',
       bg: 'bg-yellow-900/20',
       border: 'border-yellow-800/30',
       responsibilities: [
-        'Update daily work progress reports',
-        'Manage daily worker lists and attendance',
-        'Request materials and tools from QS officers',
-        'Maintain site inventory records',
-        'Upload site photos and videos',
-        'Update work breakdown structure'
+        'View project plans and drawings',
+        'Update daily work progress',
+        'Request materials and tools',
+        'Manage site inventory',
+        'Upload site photos and videos'
+      ]
+    },
+    {
+      role: 'Project Owner',
+      color: 'text-orange-400',
+      bg: 'bg-orange-900/20',
+      border: 'border-orange-800/30',
+      responsibilities: [
+        'View project progress and contracts',
+        'Track payments and materials used',
+        'Request site visits',
+        'Submit payment confirmations',
+        'Chat with project team'
+      ]
+    },
+    {
+      role: 'Supplier',
+      color: 'text-indigo-400',
+      bg: 'bg-indigo-900/20',
+      border: 'border-indigo-800/30',
+      responsibilities: [
+        'Maintain product catalogue',
+        'View and respond to quotations',
+        'Confirm delivery status',
+        'Track payment history',
+        'Submit payment invoices'
+      ]
+    },
+    {
+      role: 'Legal Officer',
+      color: 'text-pink-400',
+      bg: 'bg-pink-900/20',
+      border: 'border-pink-800/30',
+      responsibilities: [
+        'Submit contract documents',
+        'Add legal document processes',
+        'Change process status',
+        'Manage legal compliance'
       ]
     },
     {
       role: 'Director',
-      color: 'text-yellow-500',
-      bg: 'bg-yellow-900/20',
-      border: 'border-yellow-800/30',
+      color: 'text-red-400',
+      bg: 'bg-red-900/20',
+      border: 'border-red-800/30',
       responsibilities: [
-        'Initiate and oversee all projects',
-        'Assign project managers and supervisors',
+        'View all projects and assign staff',
+        'Change project status',
+        'Review system reports',
         'Monitor resource inventories',
-        'Generate and download system reports',
-        'Change project status (ongoing/terminate/hold)',
-        'Review purchasing and financial details'
+        'Update site visit logs'
+      ]
+    },
+    {
+      role: 'Architecture',
+      color: 'text-cyan-400',
+      bg: 'bg-cyan-900/20',
+      border: 'border-cyan-800/30',
+      responsibilities: [
+        'Upload project plans and drawings',
+        'Chat with Senior QS officer',
+        'Review design specifications',
+        'Provide technical guidance'
+      ]
+    },
+    {
+      role: 'Finance Department',
+      color: 'text-teal-400',
+      bg: 'bg-teal-900/20',
+      border: 'border-teal-800/30',
+      responsibilities: [
+        'Create payment plans',
+        'Add cash payment reports',
+        'Approve confirmed payments',
+        'View payment history',
+        'Enter labor charges'
       ]
     }
   ];
@@ -477,14 +549,13 @@ export default function StructuraX() {
                       <h5 className="text-xl font-bold text-yellow-300 mb-6">What's Included</h5>
                       <div className="space-y-3">
                         {[
-                          'Role-based dashboards for 12+ user types',
+                          'Role-based dashboards for 10+ user types',
                           'Blueprint upload, versioning, and approval workflows',
                           'Financial planning, approval, and cost tracking',
                           'Daily progress reporting and labor tracking',
                           'Material request handling and procurement interface',
                           'Chat and messaging system for communication',
                           'Legal contract and document storage',
-                          'Mobile access for site supervisors',
                           'Alerts, notifications, and scheduling tools',
                           'Admin module for user and permission management'
                         ].map((item, idx) => (

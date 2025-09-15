@@ -83,12 +83,12 @@ export default function InterviewPrepAI() {
       description: 'JWT-based user registration and login with secure session management'
     },
     {
-      status: 'implemented',
+      status: 'pending',
       title: 'AI Question Generation',
       description: 'Integration with Gemini API for generating role-specific interview questions and answers'
     },
     {
-      status: 'implemented',
+      status: 'pending',
       title: 'Accordion UI',
       description: 'Interactive expandable interface for clean Q&A presentation and study flow'
     },
@@ -254,28 +254,6 @@ export default function InterviewPrepAI() {
                         <div className="w-2 h-2 bg-[#1fd655] rounded-full mt-2 flex-shrink-0"></div>
                         <p className="text-gray-300 text-sm"><span className="font-semibold text-[#1fd655]">Data Persistence:</span> MongoDB for session and progress tracking</p>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-[#1fd655]/20 border border-[#1fd655]/30 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-[#1fd655] mb-6 text-center">Platform Goals</h3>
-                  <div className="grid md:grid-cols-4 gap-6 text-center">
-                    <div>
-                      <h4 className="text-lg font-bold text-[#1fd655] mb-2">Personalize</h4>
-                      <p className="text-gray-300 text-sm">Tailored questions based on specific job roles and experience</p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-[#1fd655] mb-2">Educate</h4>
-                      <p className="text-gray-300 text-sm">AI-powered explanations for complex technical concepts</p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-[#1fd655] mb-2">Organize</h4>
-                      <p className="text-gray-300 text-sm">Smart organization and pinning of important questions</p>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-[#1fd655] mb-2">Track</h4>
-                      <p className="text-gray-300 text-sm">Progress monitoring and performance analytics</p>
                     </div>
                   </div>
                 </div>

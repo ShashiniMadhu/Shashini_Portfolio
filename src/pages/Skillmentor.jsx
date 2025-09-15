@@ -422,33 +422,6 @@ export default function SkillMentor() {
                     </div>
                   ))}
                 </div>
-
-                {/* Booking Status Lifecycle */}
-                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8">
-                  <h4 className="text-2xl font-bold text-purple-400 mb-8 text-center">Booking Status Lifecycle</h4>
-                  <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-8">
-                    {bookingStatuses.map((status, index) => (
-                      <div key={index} className={`${status.bg} border ${status.color.replace('text-', 'border-').replace('400', '800/30')} rounded-xl p-6 flex-1 text-center relative`}>
-                        <div className={`inline-flex items-center justify-center w-12 h-12 ${status.color.replace('text-', 'bg-').replace('400', '400/20')} rounded-full mb-4`}>
-                          {index === 0 && <Clock className={`w-6 h-6 ${status.color}`} />}
-                          {index === 1 && <CheckCircle className={`w-6 h-6 ${status.color}`} />}
-                          {index === 2 && <CheckCircle className={`w-6 h-6 ${status.color}`} />}
-                        </div>
-                        <h5 className={`text-xl font-bold ${status.color} mb-2`}>{status.status}</h5>
-                        <p className="text-gray-400 text-sm">{status.description}</p>
-                        
-                        {/* Arrow */}
-                        {index < bookingStatuses.length - 1 && (
-                          <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 text-purple-400">
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             )}
 
@@ -518,7 +491,6 @@ export default function SkillMentor() {
                         <li>• Admin operates via API calls only</li>
                         <li>• Manual payment processing</li>
                         <li>• No real-time notifications</li>
-                        <li>• No booking cancellation/rejection</li>
                       </ul>
                     </div>
                     <div>
@@ -593,48 +565,6 @@ export default function SkillMentor() {
                       <div className="flex items-center justify-between p-4 bg-gray-700/20 rounded-lg border border-gray-600/30">
                         <span className="font-semibold text-gray-300">Deployment</span>
                         <span className="text-gray-300">Vercel</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              
-                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-8">
-                  <h4 className="text-2xl font-bold text-purple-400 mb-6">Student Booking Flow</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
-                      <div>
-                        <h6 className="font-semibold text-white">Authentication</h6>
-                        <p className="text-gray-400 text-sm">Student logs in using Clerk authentication system</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
-                      <div>
-                        <h6 className="font-semibold text-white">Browse Classes</h6>
-                        <p className="text-gray-400 text-sm">View available classes with assigned mentor details</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
-                      <div>
-                        <h6 className="font-semibold text-white">Schedule Session</h6>
-                        <p className="text-gray-400 text-sm">Select preferred date and time for tutoring session</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
-                      <div>
-                        <h6 className="font-semibold text-white">Payment Upload</h6>
-                        <p className="text-gray-400 text-sm">Upload bank transfer slip as payment confirmation</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">5</div>
-                      <div>
-                        <h6 className="font-semibold text-white">Dashboard Access</h6>
-                        <p className="text-gray-400 text-sm">Track booking status and history through personal dashboard</p>
                       </div>
                     </div>
                   </div>

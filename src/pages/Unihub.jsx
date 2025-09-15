@@ -81,12 +81,12 @@ export default function UniHUB() {
       description: 'Visual calendar with time slot booking system for student-lecturer meetings'
     },
     {
-      status: 'implemented',
+      status: 'pending',
       title: 'Smart Notification System',
       description: 'Urgency-based alerts with customizable preferences to prevent notification overload'
     },
     {
-      status: 'implemented',
+      status: 'pending',
       title: 'Broadcast Announcements',
       description: 'Priority-tagged messaging system with rich content and selective targeting'
     },
@@ -96,7 +96,7 @@ export default function UniHUB() {
       description: 'Emoji-based satisfaction ratings providing insights into response effectiveness'
     },
     {
-      status: 'pending',
+      status: 'implemented',
       title: 'Peer Learning Integration',
       description: 'Student-to-student query responses within the ticketing system for collaborative learning'
     }
