@@ -7,28 +7,42 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
   const handleNavClick = (item) => {
     setActiveSection(item);
     
-    // Map navigation items to section IDs
+    // Updated section mapping to match your ACTUAL section IDs
     const sectionMap = {
-      'home': 'hero-section',
-      'about': 'about-section', 
-      'projects': 'projects-section',
-      'skills': 'skills-section',
-      'contact': 'contact-section'
+      'home': 'home',                    // matches div id="home" in App.js
+      'about': 'about-section',          // matches id="about-section" in AboutSection.js
+      'projects': 'projects-section',    // matches id="projects-section" in ProjectsSection.js
+      'skills': 'skills-section',        // matches id="skills-section" in SkillsSection.js (assumed)
+      'contact': 'contact-section'       // matches id="contact-section" in ContactSection.js (assumed)
     };
+    
+    // Close mobile menu if open
+    setIsMobileMenuOpen(false);
     
     // Scroll to the corresponding section
     const sectionId = sectionMap[item];
     const element = document.getElementById(sectionId);
     
     if (element) {
-      // Calculate offset for fixed navigation
-      const navHeight = 80; // Approximate navigation height
-      const elementPosition = element.offsetTop - navHeight;
+      // For home section, scroll to top
+      if (item === 'home') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        return;
+      }
+      
+      // For other sections, calculate proper offset
+      const navHeight = 80; // Fixed navigation height
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - navHeight;
       
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
       });
+    } else {
+      console.warn(`Section with ID '${sectionId}' not found`);
     }
   };
 
@@ -101,10 +115,7 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
             {navItems.map((item, index) => (
               <button
                 key={item}
-                onClick={() => {
-                  handleNavClick(item);
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => handleNavClick(item)}
                 className={`block w-full text-left py-3 px-4 capitalize transition-all duration-300 rounded-lg group relative overflow-hidden ${
                   activeSection === item 
                     ? 'text-pink-400 font-semibold bg-pink-900/20' 
