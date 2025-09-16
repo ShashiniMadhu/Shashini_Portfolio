@@ -215,12 +215,7 @@ const AboutSection = () => {
                 </div>
                 
                 <div className="absolute -bottom-4 -right-4 hidden lg:block">
-                  <div className="bg-white/90 backdrop-blur-sm border border-rose-200/60 rounded-xl px-4 py-2 shadow-lg animate-float-gentle" style={{animationDelay: '1s'}}>
-                    <div className="flex items-center space-x-2">
-                      <Heart className="w-4 h-4 text-rose-600" />
-                      <span className="text-sm font-semibold text-gray-900">3.33 CGPA</span>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>

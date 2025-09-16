@@ -11,13 +11,26 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
     setIsMobileMenuOpen(false);
     
     if (item === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('home');
-      return;
-    }
+  console.log('🏠 Scrolling to home (top)');
+  
+  // Method 1: Standard scroll to top
+  window.scrollTo(0, 0);
+  
+  // Method 2: Force scroll to top with both document methods
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  
+  // Method 3: Use the home element directly
+  const homeElement = document.getElementById('home');
+  if (homeElement) {
+    homeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  setActiveSection('home');
+  return;
+}
     
     const sectionMap = {
-      'home': 'home',
       'about': 'about-section', 
       'projects': 'projects-section',
       'skills': 'skills-section',

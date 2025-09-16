@@ -93,3 +93,12 @@ section {
   z-index: 50;
 }
 
+/* Add this to your index.css to ensure home scrolling works */
+html, body {
+  scroll-behavior: auto !important; /* Force override any smooth scrolling for now */
+}
+
+/* Alternative: Target specific elements if needed */
+#root {
+  scroll-behavior: auto !important;
+}
