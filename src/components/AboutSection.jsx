@@ -186,7 +186,7 @@ const AboutSection = () => {
                   {/* Professional Photo */}
                   <div className="relative z-10 group-hover:scale-105 transition-all duration-500">
                     <img 
-                      src="src/assets/shashini.jpg" 
+                      src="/shashini.jpg" 
                       alt="Shashini Madushika - Professional Portrait" 
                       className="w-56 h-72 sm:w-64 sm:h-72 md:w-72 md:h-88 lg:w-64 lg:h-72 xl:w-72 xl:h-88 object-cover object-center rounded-2xl shadow-lg ring-2 ring-white/50 group-hover:ring-pink-200/50 transition-all duration-500"
                     />
