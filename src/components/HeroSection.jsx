@@ -37,42 +37,52 @@ const HeroSection = ({ setActiveSection }) => {
     return () => clearInterval(timer);
   }, [currentIndex]);
 
-  // Advanced mouse tracking with cursor trail
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const newPosition = {
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-        clientX: e.clientX,
-        clientY: e.clientY
-      };
-      
-      setMousePosition(newPosition);
-      
-      // Create cursor trail
-      setCursorTrail(prev => {
-        const newTrail = [...prev, { 
-          x: e.clientX, 
-          y: e.clientY, 
-          id: Date.now(),
-          opacity: 1 
-        }].slice(-8); // Keep only last 8 positions
-        return newTrail;
-      });
-    };
+useEffect(() => {
+  let trailIdCounter = 0; // Move this outside the event handler
 
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    // Clean up trail
-    const trailCleanup = setInterval(() => {
-      setCursorTrail(prev => prev.filter(point => Date.now() - point.id < 1000));
-    }, 50);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(trailCleanup);
+  const handleMouseMove = (e) => {
+    const newPosition = {
+      x: (e.clientX / window.innerWidth) * 100,
+      y: (e.clientY / window.innerHeight) * 100,
+      clientX: e.clientX,
+      clientY: e.clientY
     };
-  }, []);
+    
+    setMousePosition(newPosition);
+    
+    // Create cursor trail with truly unique IDs
+    setCursorTrail(prev => {
+      trailIdCounter += 1; // Increment counter for each new trail point
+      const uniqueId = `trail-${Date.now()}-${trailIdCounter}-${Math.random().toString(36).substr(2, 9)}`;
+      
+      const newTrail = [...prev, { 
+        x: e.clientX, 
+        y: e.clientY, 
+        id: uniqueId, // Now guaranteed unique
+        opacity: 1,
+        timestamp: Date.now()
+      }].slice(-8);
+      
+      return newTrail;
+    });
+  };
+
+  window.addEventListener('mousemove', handleMouseMove);
+  
+  // Clean up trail with improved logic
+  const trailCleanup = setInterval(() => {
+    setCursorTrail(prev => 
+      prev.filter(point => 
+        Date.now() - point.timestamp < 1000
+      )
+    );
+  }, 50);
+  
+  return () => {
+    window.removeEventListener('mousemove', handleMouseMove);
+    clearInterval(trailCleanup);
+  };
+}, []);
 
   useEffect(() => {
     setIsVisible(true);
@@ -88,9 +98,7 @@ const HeroSection = ({ setActiveSection }) => {
   };
 
   return (
-    <section className="min-h-screen flex items-end relative overflow-hidden bg-black">
-      {/* Beautiful Cursor Trail Effect */}
-      {cursorTrail.map((point, index) => (
+      <section id="home" className="min-h-screen flex items-end relative overflow-hidden bg-black pt-16 sm:pt-20 lg:pt-0">      {cursorTrail.map((point, index) => (
         <div
           key={point.id}
           className="fixed w-2 h-2 bg-pink-400/30 rounded-full pointer-events-none z-50 blur-sm"
@@ -159,9 +167,11 @@ const HeroSection = ({ setActiveSection }) => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10 pb-0">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-end min-h-screen">          
-          {/* Left Column - Enhanced Content with animations */}
-            <div className={`space-y-6 lg:space-y-8 lg:pr-12 pb-12 lg:pb-16 transform transition-all duration-1200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}> 
+        {/* Mobile: Flex column layout, Desktop: Grid layout */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-end lg:min-h-screen">          
+          
+          {/* Left Column - Content (Order 1 on mobile, Order 1 on desktop) */}
+          <div className={`space-y-6 lg:space-y-8 lg:pr-12 pb-12 lg:pb-16 transform transition-all duration-1200 order-1 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}> 
 
             {/* Greeting line with enhanced mouse interaction */}
             <div className="flex items-center space-x-4 group cursor-default">
@@ -180,7 +190,8 @@ const HeroSection = ({ setActiveSection }) => {
 
             {/* Main heading with sophisticated typography and animations */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[0.9]">                <span className="text-white block animate-fade-in-up">I'm </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[0.9]">
+                <span className="text-white block animate-fade-in-up">I'm </span>
                 <span 
                   className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-pink-300 to-pink-500 hover:from-pink-300 hover:via-pink-200 hover:to-pink-400 transition-all duration-700 cursor-default relative group block animate-gradient-x"
                   style={{
@@ -217,7 +228,8 @@ const HeroSection = ({ setActiveSection }) => {
                 transition: 'transform 0.5s ease-out'
               }}
             >
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-400 leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-500">                Crafting exceptional digital experiences through innovative design and robust development. 
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-400 leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-500">
+                Crafting exceptional digital experiences through innovative design and robust development. 
                 <span className="text-pink-300/80 animate-text-glow"> Transforming visionary ideas into powerful, user-focused solutions.</span>
               </p>
               <div className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-pink-500 via-pink-400 to-transparent group-hover:w-full transition-all duration-1500 ease-out"></div>
@@ -277,13 +289,13 @@ const HeroSection = ({ setActiveSection }) => {
             </div>
           </div>
 
-          {/* Right Column - Enhanced MASSIVE Image with Beautiful Animations */}
-          <div className="relative flex justify-center items-end order-first lg:order-last h-full">
+          {/* Right Column - Image (Order 2 on mobile = below content, Order 2 on desktop = right side) */}
+          <div className="relative flex justify-center items-center lg:items-end order-2 h-auto lg:h-full py-8 lg:py-0">
             
-            {/* Main image container with sophisticated effects */}
-            <div className="relative group flex items-end justify-center h-full">
+            {/* Main image container with responsive sizing */}
+            <div className="relative group flex items-center lg:items-end justify-center h-full w-full">
               
-              {/* Image with professional presentation and mouse interaction */}
+              {/* Image with proper responsive sizing: smaller on mobile, full size on desktop */}
               <div 
                 className="relative overflow-hidden rounded-t-3xl bg-black shadow-2xl group-hover:shadow-black/80 transition-all duration-700 animate-fade-in-scale"
                 style={{
@@ -292,14 +304,15 @@ const HeroSection = ({ setActiveSection }) => {
                 }}
               >
                 
-                {/* The main professional image - EXTRA MASSIVE SIZE with animations */}
+                {/* RESPONSIVE IMAGE: Small on mobile (below content), Full size on desktop */}
                 <img 
                   src="src/assets/portfolio.png" 
                   alt="Shashini - Professional Portfolio"
                   className="
-                    w-full max-w-[35rem] sm:max-w-[40rem] md:max-w-[45rem] lg:max-w-[50rem] xl:max-w-[55rem] 2xl:max-w-[60rem]
+                    w-full 
                     h-auto 
-                    object-contain object-bottom
+                    object-contain 
+                    object-bottom
                     bg-black
                     rounded-t-3xl
                     filter group-hover:brightness-110 group-hover:contrast-105
@@ -307,11 +320,14 @@ const HeroSection = ({ setActiveSection }) => {
                     relative z-10
                     block
                     animate-image-glow
+                    max-w-[280px] max-h-[350px] 
+                    sm:max-w-[320px] sm:max-h-[400px] 
+                    md:max-w-[360px] md:max-h-[450px]
+                    lg:max-w-[35rem] lg:max-h-[calc(100vh-2rem)] lg:min-h-[80vh]
+                    xl:max-w-[40rem] 
+                    2xl:max-w-[45rem]
+                    mx-auto
                   "
-                  style={{
-                    maxHeight: 'calc(100vh - 2rem)',
-                    minHeight: '80vh'
-                  }}
                 />
                 
                 {/* Subtle professional border with animation */}
@@ -328,30 +344,30 @@ const HeroSection = ({ setActiveSection }) => {
 
               {/* Enhanced floating accent elements with mouse tracking */}
               <div 
-                className="absolute -top-8 -right-8 w-4 h-4 bg-pink-600/60 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-700 animate-orbit"
+                className="absolute -top-4 lg:-top-8 -right-4 lg:-right-8 w-3 h-3 lg:w-4 lg:h-4 bg-pink-600/60 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-700 animate-orbit"
                 style={{
                   transform: `translate(${mousePosition.x * 0.05 + Math.sin(Date.now() * 0.002) * 10}px, ${mousePosition.y * 0.05 + Math.cos(Date.now() * 0.002) * 10}px)`
                 }}
               />
               
               <div 
-                className="absolute top-1/3 -left-6 w-3 h-3 bg-pink-700/50 rounded-full opacity-0 group-hover:opacity-50 transition-all duration-700 animate-orbit"
+                className="absolute top-1/3 -left-3 lg:-left-6 w-2 h-2 lg:w-3 lg:h-3 bg-pink-700/50 rounded-full opacity-0 group-hover:opacity-50 transition-all duration-700 animate-orbit"
                 style={{
                   transform: `translate(${mousePosition.x * -0.03 + Math.cos(Date.now() * 0.0015) * 8}px, ${mousePosition.y * -0.03 + Math.sin(Date.now() * 0.0015) * 8}px)`,
                   animationDelay: '1s'
                 }}
               />
 
-              {/* Professional highlight effects */}
+              {/* Professional highlight effects - responsive */}
               <div 
-                className="absolute top-1/4 -right-12 w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1000 animate-shimmer"
+                className="absolute top-1/4 -right-6 lg:-right-12 w-12 lg:w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1000 animate-shimmer"
                 style={{
                   transform: `translateX(${mousePosition.x * 0.08}px) rotate(45deg) scaleX(${1 + mousePosition.x * 0.002})`
                 }}
               />
               
               <div 
-                className="absolute top-1/2 -left-8 w-16 h-0.5 bg-gradient-to-l from-transparent via-pink-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1200 animate-shimmer"
+                className="absolute top-1/2 -left-4 lg:-left-8 w-8 lg:w-16 h-0.5 bg-gradient-to-l from-transparent via-pink-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-1200 animate-shimmer"
                 style={{
                   transform: `translateX(${mousePosition.x * -0.06}px) rotate(-45deg)`,
                   animationDelay: '0.5s'
@@ -359,9 +375,12 @@ const HeroSection = ({ setActiveSection }) => {
               />
             </div>
 
-            {/* Enhanced background accent elements */}
+            {/* Enhanced background accent elements - responsive */}
             <div 
-              className="absolute -z-10 bottom-0 left-1/2 transform -translate-x-1/2 w-[120%] h-[80%] bg-gradient-to-t from-gray-900/20 via-transparent to-gray-900/10 rounded-t-full blur-3xl animate-pulse-slow"
+              className="absolute -z-10 bottom-0 left-1/2 transform -translate-x-1/2 
+                         w-[100%] h-[50%] 
+                         lg:w-[120%] lg:h-[80%] 
+                         bg-gradient-to-t from-gray-900/20 via-transparent to-gray-900/10 rounded-t-full blur-3xl animate-pulse-slow"
               style={{
                 transform: `translateX(-50%) scale(${1 + mousePosition.x * 0.003}) rotate(${mousePosition.x * 0.08}deg) translateY(${mousePosition.y * 0.02}px)`
               }}
@@ -538,8 +557,8 @@ const HeroSection = ({ setActiveSection }) => {
           animation: text-reveal 0.6s ease-out forwards;
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
+        /* Enhanced Responsive adjustments */
+        @media (max-width: 1024px) {
           .animate-float-gentle {
             animation-duration: 4s;
           }

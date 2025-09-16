@@ -5,44 +5,51 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
   const navItems = ['home', 'about', 'projects', 'skills', 'contact'];
 
   const handleNavClick = (item) => {
-    setActiveSection(item);
+    console.log(`🔥 Clicked: ${item}`);
     
-    // Updated section mapping to match your ACTUAL section IDs
-    const sectionMap = {
-      'home': 'home',                    // matches div id="home" in App.js
-      'about': 'about-section',          // matches id="about-section" in AboutSection.js
-      'projects': 'projects-section',    // matches id="projects-section" in ProjectsSection.js
-      'skills': 'skills-section',        // matches id="skills-section" in SkillsSection.js (assumed)
-      'contact': 'contact-section'       // matches id="contact-section" in ContactSection.js (assumed)
-    };
-    
-    // Close mobile menu if open
+    // Close mobile menu first
     setIsMobileMenuOpen(false);
     
-    // Scroll to the corresponding section
+    if (item === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveSection('home');
+      return;
+    }
+    
+    const sectionMap = {
+      'home': 'home',
+      'about': 'about-section', 
+      'projects': 'projects-section',
+      'skills': 'skills-section',
+      'contact': 'contact-section'
+    };
+    
     const sectionId = sectionMap[item];
     const element = document.getElementById(sectionId);
     
     if (element) {
-      // For home section, scroll to top
-      if (item === 'home') {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        return;
-      }
+      // Try multiple scrolling methods
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset + rect.top - 100;
       
-      // For other sections, calculate proper offset
-      const navHeight = 80; // Fixed navigation height
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      console.log(`✅ Attempting scroll to ${scrollTop}`);
+      console.log(`Current scroll position: ${window.pageYOffset}`);
       
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
+      // Method 1: Direct element scrolling
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start',
+        inline: 'nearest'
       });
+      
+      // Method 2: Manual offset adjustment after scrollIntoView
+      setTimeout(() => {
+        window.scrollBy(0, -100); // Adjust for navbar
+      }, 100);
+      
+      setActiveSection(item);
     } else {
-      console.warn(`Section with ID '${sectionId}' not found`);
+      console.error(`❌ Element with ID '${sectionId}' NOT FOUND`);
     }
   };
 
@@ -50,15 +57,12 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-md z-50 border-b border-gray-800/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo with hover effect */}
+          {/* Logo */}
           <div 
-            className="text-2xl font-bold text-pink-400 hover:text-pink-300 transition-colors duration-300 cursor-pointer group"
+            className="text-2xl font-bold text-pink-400 hover:text-pink-300 transition-colors duration-300 cursor-pointer"
             onClick={() => handleNavClick('home')}
           >
-            <span className="relative">
-              Shashini
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-500 group-hover:w-full transition-all duration-300"></div>
-            </span>
+            Shashini
           </div>
           
           {/* Desktop Navigation */}
@@ -67,81 +71,69 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className={`capitalize transition-all duration-300 relative group py-2 ${
+                className={`capitalize transition-all duration-300 py-2 px-4 rounded relative group ${
                   activeSection === item 
-                    ? 'text-pink-400 font-semibold' 
-                    : 'text-gray-300 hover:text-pink-400'
+                    ? 'text-pink-400 font-semibold bg-pink-900/20' 
+                    : 'text-gray-300 hover:text-pink-400 hover:bg-pink-900/10'
                 }`}
               >
                 {item}
                 {/* Active indicator */}
-                <div className={`absolute bottom-0 left-0 h-0.5 bg-pink-500 transition-all duration-300 ${
+                <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-pink-400 transition-all duration-300 ${
                   activeSection === item ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></div>
-                
-                {/* Hover background effect */}
-                <div className="absolute inset-0 bg-pink-900/10 rounded-md scale-0 group-hover:scale-100 transition-transform duration-200 -z-10"></div>
+                }`} />
               </button>
             ))}
           </div>
 
-          {/* Mobile menu button with enhanced animation */}
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-300 hover:text-pink-400 transition-all duration-300 p-2 hover:bg-pink-900/20 rounded-lg transform hover:scale-110"
+            className="md:hidden text-gray-300 hover:text-pink-400 p-2 transition-colors duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <div className="relative w-6 h-6">
-              <Menu 
-                size={24} 
-                className={`absolute inset-0 transition-all duration-300 ${
-                  isMobileMenuOpen ? 'opacity-0 rotate-180 scale-0' : 'opacity-100 rotate-0 scale-100'
-                }`} 
-              />
-              <X 
-                size={24} 
-                className={`absolute inset-0 transition-all duration-300 ${
-                  isMobileMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-180 scale-0'
-                }`} 
-              />
-            </div>
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu with enhanced animations */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="mt-4 py-4 border-t border-gray-800/50 space-y-2">
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 py-4 border-t border-gray-800/50 animate-fade-in">
             {navItems.map((item, index) => (
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className={`block w-full text-left py-3 px-4 capitalize transition-all duration-300 rounded-lg group relative overflow-hidden ${
+                className={`block w-full text-left py-3 px-4 capitalize rounded transition-all duration-300 ${
                   activeSection === item 
                     ? 'text-pink-400 font-semibold bg-pink-900/20' 
                     : 'text-gray-300 hover:text-pink-400 hover:bg-pink-900/10'
                 }`}
                 style={{
-                  transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms'
+                  animationDelay: `${index * 50}ms`
                 }}
               >
-                <div className="relative z-10 flex items-center justify-between">
-                  {item}
-                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeSection === item ? 'bg-pink-500' : 'bg-transparent group-hover:bg-pink-600'
-                  }`}></div>
-                </div>
-                
-                {/* Slide effect on hover */}
-                <div className="absolute inset-0 bg-pink-800/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                {item}
               </button>
             ))}
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Subtle bottom glow effect */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-800/30 to-transparent"></div>
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out forwards;
+        }
+      `}</style>
     </nav>
   );
 };

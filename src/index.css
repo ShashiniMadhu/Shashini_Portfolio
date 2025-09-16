@@ -4,6 +4,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* ADDED: explicitly allow vertical scrolling */
+}
+
+/* COMMENTED OUT - THESE WERE CAUSING THE CONFLICT */
+/* Smooth scrolling with better browser support */
+/*
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+*/
+
+/* For browsers that don't support scroll-behavior */
+/*
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+*/
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Custom animations */
 .animation-delay-2000 {
   animation-delay: 2s;
@@ -31,7 +77,19 @@
   background: #64748b;
 }
 
-/* Smooth scrolling */
+/* Firefox scrollbar */
 html {
-  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #1e293b;
 }
+
+/* Ensure sections are properly spaced for navigation */
+section {
+  position: relative;
+}
+
+/* Fix for any potential z-index issues */
+.fixed {
+  z-index: 50;
+}
+

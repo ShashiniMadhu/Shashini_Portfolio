@@ -1,8 +1,14 @@
+/* Remove the problematic root styles that are constraining your layout */
 #root {
+  /* Remove these lines that are causing the issues:
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: center; */
+  
+  /* Instead, use these minimal styles: */
+  width: 100%;
+  min-height: 100vh;
 }
 
 .logo {
@@ -11,9 +17,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
