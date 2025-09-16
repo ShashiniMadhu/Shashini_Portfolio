@@ -84,7 +84,7 @@ const ProjectsSection = () => {
       id: 4,
       title: 'UniHUB',
       description: 'UniHub is a lecturer–student communication platform built with featuring query management, appointment scheduling, AI-powered paper discussions, and student productivity tools.',
-      image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop',
+      image: '/unihub1.png',
       tech: ['React', 'TailwindCSS', 'Java Springboot', 'MySQL','alwaysdata','geminai ai'],
       category: 'fullstack',
       github: 'https://github.com/Peshala84/uni-hub.git',

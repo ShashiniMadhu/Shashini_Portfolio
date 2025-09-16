@@ -70,12 +70,26 @@ const Navigation = ({ activeSection, setActiveSection, isMobileMenuOpen, setIsMo
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-md z-50 border-b border-gray-800/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo with Portfolio Image */}
           <div 
-            className="text-2xl font-bold text-pink-400 hover:text-pink-300 transition-colors duration-300 cursor-pointer"
+            className="flex items-center space-x-3 hover:scale-105 transition-all duration-300 cursor-pointer group"
             onClick={() => handleNavClick('home')}
           >
-            Shashini
+            {/* Portfolio Image */}
+            <div className="relative">
+              <img 
+                src="/portfolio.png" 
+                alt="Shashini Portfolio" 
+                className="w-10 h-10 rounded-full object-cover border-2 border-pink-400/50 group-hover:border-pink-400 transition-all duration-300 shadow-lg group-hover:shadow-pink-400/25"
+              />
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-full bg-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+            </div>
+            
+            {/* Text */}
+            <div className="text-2xl font-bold text-pink-400 group-hover:text-pink-300 transition-colors duration-300">
+              Shashini
+            </div>
           </div>
           
           {/* Desktop Navigation */}

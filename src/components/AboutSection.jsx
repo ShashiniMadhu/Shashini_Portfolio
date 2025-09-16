@@ -150,16 +150,16 @@ const AboutSection = () => {
                 
                 <div className="group cursor-default">
                   <p className="text-lg text-gray-700 leading-relaxed group-hover:text-gray-900 transition-all duration-300 hover:transform hover:scale-[1.01] mb-6">
-                    I specialize in <span className="font-medium text-pink-600">Java Spring Boot, React</span>, and modern web technologies including 
+                    I specialize in <span className="font-medium text-gray-800">Java Spring Boot, React</span>, and modern web technologies including 
                     Python, JavaScript, and database systems. With proven leadership abilities in collaborative development environments, I've successfully 
                     guided teams and delivered high-quality projects like <span className="font-medium text-gray-800">StructuraX and SkillMentor</span>. 
-                    Currently working as a <span className="font-semibold text-rose-600">Backend Developer at Athenyx Systems</span>.
+                    Currently working as a <span className="font-semibold text-gray-800">Backend Developer at Athenyx Systems</span>.
                   </p>
                 </div>
                 
                 <div className="group cursor-default">
                   <p className="text-lg text-gray-700 leading-relaxed group-hover:text-gray-900 transition-all duration-300 hover:transform hover:scale-[1.01]">
-                    When I'm not coding, you'll find me competing in sports like <span className="font-medium text-pink-600">Kabaddi and Cricket</span>, 
+                    When I'm not coding, you'll find me competing in sports like <span className="font-medium text-gray-800">Kabaddi and Cricket</span>, 
                     contributing to hackathons, and exploring the latest tech innovations.
                   </p>
                 </div>

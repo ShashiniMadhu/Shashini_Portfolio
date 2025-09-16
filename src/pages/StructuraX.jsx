@@ -257,7 +257,7 @@ export default function StructuraX() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 bg-yellow-900/20 px-4 py-2 rounded-full border border-yellow-800/30 mb-6">
               <Building className="w-4 h-4 text-yellow-400" />
-              <span className="text-yellow-300 text-sm font-medium">Construction Management · Full Stack Project</span>
+              <span className="text-yellow-300 text-sm font-medium">Third Year Group Project</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent mb-6">

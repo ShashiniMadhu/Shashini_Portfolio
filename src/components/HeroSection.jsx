@@ -190,7 +190,7 @@ useEffect(() => {
 
             {/* Main heading with sophisticated typography and animations */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[0.9]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[0.9]">
                 <span className="text-white block animate-fade-in-up">I'm </span>
                 <span 
                   className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-pink-300 to-pink-500 hover:from-pink-300 hover:via-pink-200 hover:to-pink-400 transition-all duration-700 cursor-default relative group block animate-gradient-x"
@@ -205,9 +205,9 @@ useEffect(() => {
               </h1>
 
               {/* Dynamic role text with enhanced animations */}
-              <div className="h-20 flex items-center">
+              <div className="h-16 flex items-center">
                 <span 
-                  className="text-2xl lg:text-4xl xl:text-5xl font-light text-gray-300 relative animate-text-reveal"
+                  className="text-xl lg:text-2xl xl:text-3xl font-light text-gray-300 relative animate-text-reveal"
                   style={{
                     transform: `translateX(${mousePosition.x * 0.01}px)`,
                     transition: 'transform 0.4s ease-out'

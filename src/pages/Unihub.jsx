@@ -137,7 +137,7 @@ export default function UniHUB() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 bg-emerald-900/20 px-4 py-2 rounded-full border border-emerald-800/30 mb-6">
               <MessageSquare className="w-4 h-4 text-emerald-400" />
-              <span className="text-emerald-300 text-sm font-medium">Communication Platform · Full Stack Project</span>
+              <span className="text-emerald-300 text-sm font-medium">Communication Platform · Group Project</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-400 via-green-300 to-teal-400 bg-clip-text text-transparent mb-6">
