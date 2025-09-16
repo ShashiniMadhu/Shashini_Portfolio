@@ -305,7 +305,7 @@ useEffect(() => {
                 
                 {/* RESPONSIVE IMAGE: Small on mobile (below content), Full size on desktop */}
                 <img 
-                  src="src/assets/portfolio.png" 
+                  src="/portfolio.png" 
                   alt="Shashini - Professional Portfolio"
                   className="
                     w-full 
