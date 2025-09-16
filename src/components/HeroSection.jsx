@@ -239,28 +239,27 @@ useEffect(() => {
             <div className="flex flex-col sm:flex-row gap-6 pt-8 animate-fade-in-up">
               <button
                 onClick={handleDownloadCV}
-                className="group relative px-12 py-6 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-500 hover:to-pink-600 text-white rounded-2xl font-semibold text-lg transform hover:scale-110 hover:-translate-y-2 transition-all duration-400 shadow-2xl hover:shadow-pink-900/60 flex items-center justify-center space-x-4 overflow-hidden"
+                className="group relative px-8 py-4 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-500 hover:to-pink-600 text-white rounded-2xl font-semibold text-base transform hover:scale-110 hover:-translate-y-2 transition-all duration-400 shadow-2xl hover:shadow-pink-900/60 flex items-center justify-center space-x-3 overflow-hidden"
                 style={{
                   transform: `perspective(1000px) rotateY(${mousePosition.x * 0.005}deg) rotateX(${mousePosition.y * 0.003}deg) scale(${1 + mousePosition.x * 0.0005})`,
                   transition: 'transform 0.3s ease-out'
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/15 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                <Download className="w-6 h-6 relative z-10 group-hover:animate-bounce-gentle" />
+                <Download className="w-5 h-5 relative z-10 group-hover:animate-bounce-gentle" />
                 <span className="relative z-10">Download Resume</span>
-                <ArrowRight className="w-5 h-5 relative z-10 transform group-hover:translate-x-2 transition-transform duration-300" />
               </button>
-              
+
               <button
                 onClick={() => setActiveSection('contact')}
-                className="group px-12 py-6 border-2 border-pink-600/60 hover:border-pink-500 text-pink-300 hover:text-white rounded-2xl font-semibold text-lg transform hover:scale-110 hover:-translate-y-2 transition-all duration-400 backdrop-blur-sm relative overflow-hidden animate-border-glow"
+                className="group px-8 py-4 border-2 border-pink-600/60 hover:border-pink-500 text-pink-300 hover:text-white rounded-2xl font-semibold text-base transform hover:scale-110 hover:-translate-y-2 transition-all duration-400 backdrop-blur-sm relative overflow-hidden animate-border-glow"
                 style={{
                   transform: `perspective(1000px) rotateY(${mousePosition.x * -0.005}deg) rotateX(${mousePosition.y * -0.003}deg)`,
                   transition: 'transform 0.3s ease-out'
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-pink-700/20 transform scale-0 group-hover:scale-100 transition-transform duration-400 origin-center rounded-2xl"></div>
-                <Mail className="w-6 h-6 inline-block mr-4 group-hover:rotate-12 transition-transform duration-300 relative z-10" />
+                <Mail className="w-5 h-5 inline-block mr-3 group-hover:rotate-12 transition-transform duration-300 relative z-10" />
                 <span className="relative z-10">Let's Connect</span>
               </button>
             </div>
